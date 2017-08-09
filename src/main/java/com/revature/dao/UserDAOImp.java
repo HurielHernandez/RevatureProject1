@@ -129,25 +129,20 @@ public class UserDAOImp implements UserDAO
 	{
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
-
-		boolean created = false;
 		
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
-			final String SQL = "UDPATE ERS_USERS ER( U_USERNAME, U_EMAIL, U_FIRSTNAME, U_LASTNAME, U_PASSWORD ) "
-								+ "VALUES ( ?, ?, ?, ?, ?)";
+			final String SQL = "UDPATE ERS_USERS ER  U_USERNAME=?, U_EMAIL=?, U_FIRSTNAME=?, U_LASTNAME=?, U_PASSWORD=?";
+
 			pstmt = connection.prepareStatement(SQL);
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getFirstName());
 			pstmt.setString(4, user.getLastName());
 			pstmt.setString(5, user.getPassword());
-			resultSet = pstmt.executeQuery();
+			pstmt.executeUpdate();
 			//get user role
-			while (resultSet.next())
-			{
-				created = true;
-			}
+		
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -156,7 +151,6 @@ public class UserDAOImp implements UserDAO
 			e1.printStackTrace();
 		}
 		
-		return created;
 		
 	}
 
