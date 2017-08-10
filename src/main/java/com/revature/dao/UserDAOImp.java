@@ -17,7 +17,7 @@ public class UserDAOImp implements UserDAO
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
 
-		User returnUser = null;
+		User returnUser = new User();
 
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
@@ -64,9 +64,9 @@ public class UserDAOImp implements UserDAO
 			pstmt = connection.prepareStatement(SQL);
 			resultSet = pstmt.executeQuery();
 
-			while (resultSet.next())
+			while (resultSet.next()  )
 			{
-				User user = null;
+				User user = new User();
 				user.setId(resultSet.getInt("U_ID"));
 				user.setUsername(resultSet.getString("U_USERNAME"));
 				user.setEmail(resultSet.getString("U_EMAIL"));
@@ -107,9 +107,10 @@ public class UserDAOImp implements UserDAO
 			pstmt.setString(3, user.getFirstName());
 			pstmt.setString(4, user.getLastName());
 			pstmt.setString(5, user.getPassword());
+			
 			resultSet = pstmt.executeQuery();
 			//get user role
-			while (resultSet.next())
+			if (resultSet.next())
 			{
 				created = true;
 			}
@@ -125,29 +126,30 @@ public class UserDAOImp implements UserDAO
 	}
 
 	@Override
-	public void UpdateUser(User user)
+	public boolean updateUser(User user)
 	{
 		PreparedStatement pstmt = null;
 		ResultSet resultSet = null;
-
-		boolean created = false;
+		boolean updated = false;
 		
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
-			final String SQL = "UDPATE ERS_USERS ER( U_USERNAME, U_EMAIL, U_FIRSTNAME, U_LASTNAME, U_PASSWORD ) "
-								+ "VALUES ( ?, ?, ?, ?, ?)";
+			final String SQL = "UPDATE ERS_USERS SET U_USERNAME=?, U_EMAIL=?, U_FIRSTNAME=?, U_LASTNAME=?, U_PASSWORD=?";
+
 			pstmt = connection.prepareStatement(SQL);
 			pstmt.setString(1, user.getUsername());
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getFirstName());
 			pstmt.setString(4, user.getLastName());
 			pstmt.setString(5, user.getPassword());
-			resultSet = pstmt.executeQuery();
+			
+			int result = pstmt.executeUpdate();
 			//get user role
-			while (resultSet.next())
+			if (result  > 0)
 			{
-				created = true;
+				updated = true;
 			}
+		
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
@@ -156,8 +158,7 @@ public class UserDAOImp implements UserDAO
 			e1.printStackTrace();
 		}
 		
-		return created;
-		
+		return updated;
 	}
 
 

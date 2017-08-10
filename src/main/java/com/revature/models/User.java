@@ -10,6 +10,17 @@ public class User
 	private String email;
 	private String userRole;
 	
+	public User()
+	{
+		this.id = 0;
+		this.username  = null;
+		this.password = null;
+		this.firstName = null;
+		this.lastName = null;
+		this.email = null;
+		this.userRole = null;
+	}
+	
 	public User(int id, String username, String password, String firstName, String lastName, String email,
 			String userRole)
 	{
