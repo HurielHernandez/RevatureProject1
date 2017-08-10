@@ -9,13 +9,15 @@ public class Reimbursement
 	private String description;
 	private Date submitted;
 	private Date resolved;
-	private User author;
-	private User resolver;
+	private String author;
+	private int authorId;
+	private int resolverId;
+	private String resolver;
 	private String type;
 	private String status;
 	
-	public Reimbursement(int id, double amount, String description, Date submitted, Date resolved, User author,
-			User resolver, String type, String status)
+	public Reimbursement(int id, double amount, String description, Date submitted, Date resolved, String author,
+			String resolver, int authorId, int resolverId, String type, String status)
 	{
 		this.id = id;
 		this.amount = amount;
@@ -24,8 +26,27 @@ public class Reimbursement
 		this.resolved = resolved;
 		this.author = author;
 		this.resolver = resolver;
+		this.authorId = authorId;
+		this.resolverId = resolverId;
 		this.type = type;
 		this.status = status;
+		
+	}
+
+	public Reimbursement()
+	{
+		this.id = 0;
+		this.amount = 0;
+		this.description = null;
+		this.submitted = null;
+		this.resolved = null;
+		this.author = null;
+		this.resolver = null;
+		this.authorId = 0;
+		this.resolverId = 0;
+		this.type = null;
+		this.status = null;
+		
 	}
 
 	public int getId()
@@ -78,22 +99,42 @@ public class Reimbursement
 		this.resolved = resolved;
 	}
 
-	public User getAuthor()
+	public String getAuthor()
 	{
 		return author;
 	}
 
-	public void setAuthor(User author)
+	public void setAuthor(String author)
 	{
 		this.author = author;
 	}
+	
+	public int getAuthorId()
+	{
+		return authorId;
+	}
 
-	public User getResolver()
+	public void setAuthorId(int authorId)
+	{
+		this.authorId = authorId;
+	}
+
+	public int getResolverId()
+	{
+		return resolverId;
+	}
+
+	public void setResolverId(int resolverId)
+	{
+		this.resolverId = resolverId;
+	}
+
+	public String getResolver()
 	{
 		return resolver;
 	}
 
-	public void setResolver(User resolver)
+	public void setResolver(String resolver)
 	{
 		this.resolver = resolver;
 	}
