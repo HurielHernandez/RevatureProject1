@@ -12,7 +12,7 @@ public interface UserDAO
 	
 	public boolean createUser(User user);
 	
-	public void UpdateUser(User user);
+	public boolean updateUser(User user);
 	
 	
 }
