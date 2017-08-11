@@ -13,11 +13,11 @@ public class Reimbursement
 	private int authorId;
 	private int resolverId;
 	private String resolver;
-	private String type;
-	private String status;
+	private int type;
+	private int status;
 	
 	public Reimbursement(int id, double amount, String description, Date submitted, Date resolved, String author,
-			String resolver, int authorId, int resolverId, String type, String status)
+			String resolver, int authorId, int resolverId, int type, int status)
 	{
 		this.id = id;
 		this.amount = amount;
@@ -44,8 +44,8 @@ public class Reimbursement
 		this.resolver = null;
 		this.authorId = 0;
 		this.resolverId = 0;
-		this.type = null;
-		this.status = null;
+		this.type = 0;
+		this.status = 0;
 		
 	}
 
@@ -139,22 +139,22 @@ public class Reimbursement
 		this.resolver = resolver;
 	}
 
-	public String getType()
+	public int getType()
 	{
 		return type;
 	}
 
-	public void setType(String type)
+	public void setType(int type)
 	{
 		this.type = type;
 	}
 
-	public String getStatus()
+	public int getStatus()
 	{
 		return status;
 	}
 
-	public void setStatus(String status)
+	public void setStatus(int status)
 	{
 		this.status = status;
 	}

@@ -133,7 +133,7 @@ public class UserDAOImp implements UserDAO
 		
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
-			final String SQL = "UPDATE ERS_USERS SET U_USERNAME=?, U_EMAIL=?, U_FIRSTNAME=?, U_LASTNAME=?, U_PASSWORD=?";
+			final String SQL = "UPDATE ERS_USERS SET U_USERNAME=?, U_EMAIL=?, U_FIRSTNAME=?, U_LASTNAME=?, U_PASSWORD=? WHERE U_ID =?";
 
 			pstmt = connection.prepareStatement(SQL);
 			pstmt.setString(1, user.getUsername());
@@ -141,6 +141,7 @@ public class UserDAOImp implements UserDAO
 			pstmt.setString(3, user.getFirstName());
 			pstmt.setString(4, user.getLastName());
 			pstmt.setString(5, user.getPassword());
+			pstmt.setInt(6, user.getId());
 			
 			int result = pstmt.executeUpdate();
 			//get user role

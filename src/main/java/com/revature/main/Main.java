@@ -20,19 +20,6 @@ public class Main
 
 	private static void userDao()
 	{
-		UserDAOImp database = new UserDAOImp();
-		ArrayList<User> users = database.readAllUsers();
 		
-		User user = database.readUser("alpha2c");
-		
-		user.setEmail("femail@email.com");
-		
-		boolean updated = database.updateUser(user);
-		
-		System.out.println("user updated " + updated);
-		
-		System.out.println(users);
-		
-		System.out.println(user);
 	}
 }
