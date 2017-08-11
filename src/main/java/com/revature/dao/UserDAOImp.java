@@ -161,6 +161,37 @@ public class UserDAOImp implements UserDAO
 		return updated;
 	}
 
+	
+	public boolean deleteUser(User user) {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		boolean deleted = false;
+		
+		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
+		{
+			final String SQL = "DELETE FROM ERS_USERS SET WHERE U_ID =?";
+
+			pstmt = connection.prepareStatement(SQL);
+			pstmt.setInt(1, user.getId());
+			
+			int result = pstmt.executeUpdate();
+			//get user role
+			if (result  > 0)
+			{
+				deleted = true;
+			}
+		
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
+		return deleted;
+	}
+
 
 
 }

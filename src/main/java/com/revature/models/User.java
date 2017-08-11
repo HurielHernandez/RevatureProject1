@@ -8,7 +8,7 @@ public class User
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String userRole;
+	private int userRole;
 	
 	public User()
 	{
@@ -18,11 +18,11 @@ public class User
 		this.firstName = null;
 		this.lastName = null;
 		this.email = null;
-		this.userRole = null;
+		this.userRole = 0;
 	}
 	
 	public User(int id, String username, String password, String firstName, String lastName, String email,
-			String userRole)
+			int userRole)
 	{
 
 		this.id = id;
@@ -94,12 +94,12 @@ public class User
 		this.email = email;
 	}
 
-	public String getUserRole()
+	public int getUserRole()
 	{
 		return userRole;
 	}
 
-	public void setUserRole(String userRole)
+	public void setUserRole(int userRole)
 	{
 		this.userRole = userRole;
 	}

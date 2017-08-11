@@ -139,7 +139,46 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 		
 		return updated;
 	}
-	
+
+	@Override
+	public boolean createReimbursment(Reimbursement reimburse) {
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+		boolean created = false;
+		
+		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
+		{
+			final String SQL = "INSERT INTO ERS_REIMBURSEMENTS (R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED,"
+					+ " U_ID_AUTHOR, U_ID_RESOLVER=?, RT_TYPE, RT_STATUS) VALUES(?,?,?,?,?,?,?,?) ";
+
+			pstmt = connection.prepareStatement(SQL);
+			pstmt.setDouble(1, reimburse.getAmount());
+			pstmt.setString(2, reimburse.getDescription());
+			//pstmt.setBlob(3, reimburse.getReciept);
+			pstmt.setDate(3, (Date) reimburse.getSubmitted());
+			pstmt.setDate(4, (Date) reimburse.getResolved());
+			pstmt.setInt(5, reimburse.getAuthorId());
+			pstmt.setInt(6, reimburse.getResolverId());
+			pstmt.setInt(7, reimburse.getType());
+			pstmt.setInt(8, reimburse.getStatus());
+			
+			int result = pstmt.executeUpdate();
+			//get user role
+			if (result  > 0)
+			{
+				created  = true;
+			}
+		
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+		
+		return created ;
+	}
 
 }
 

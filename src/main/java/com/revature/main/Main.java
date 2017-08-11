@@ -20,6 +20,17 @@ public class Main
 
 	private static void userDao()
 	{
+		User bob = new User();
+		bob.setUsername("xkcd");
+		bob.setPassword("blackhat");
+		bob.setFirstName("Eric");
+		bob.setLastName("Hontz");
+		bob.setEmail("lawyermail@sharklazers.com");
+		bob.setUserRole(1);
+		
+		UserDAOImp tab = new UserDAOImp();
+		
+		tab.createUser(bob);
 		
 	}
 }
