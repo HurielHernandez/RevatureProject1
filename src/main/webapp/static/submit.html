@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Revature</title>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <link rel="stylesheet" type="text/css" href="paper.css">
+      <link rel="stylesheet" type="text/css" href="main.css">
+   </head>
+   <body>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded ">
+         <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#"><strong>REVATURE </strong><span class="text-muted">REIMBURSEMENT</span></a>
+         </div>
+         <ul class="nav nav-pills" >
+            <li class="nav-item dropdown ">
+               <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Huriel Hernandez</a>
+               <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+               </div>
+            </li>
+         </ul>
+      </nav>
+      <main >
+         <div class="container">
+            <div class="row">
+               <div class="col-3">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-action">
+                     Reimbursements
+                     </button>
+                     <button type="button" class="list-group-item list-group-item-action active">Create Request</button>
+                     <button type="button" class="list-group-item list-group-item-action">Personal Information</button>
+                     <button type="button" class="list-group-item list-group-item-action">Logout</button>
+                  </div>
+               </div>
+               <div class="col-9">
+                  <h3>Create Reimbursement Request</h3>
+                  <div class="card">
+                     <div class="card-block">
+                        <form>
+                           <div class="form-group">
+                              <label for="example-date-input" class="col-form-label">Date</label>
+                              <div class="">
+                                 <input class="form-control" type="date" value="2017-08-19" id="example-date-input">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleTextarea">Purpose</label>
+                              <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                           </div>
+                           <div class="form-group">
+                              <label for="inlineFormInputGroup" class="col-form-label">Amount</label>
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                 <div class="input-group-addon">$</div>
+                                 <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleInputFile">Upload File</label>
+                              <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                              <small id="fileHelp" class="form-text text-muted">Attach proof of receipt </small>
+                           </div>
+                           <button type="submit" class="btn btn-primary">Submit</button>
+                     </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+      </main>
+        <footer class="footer" style="position-bottom: 0px; position: fixed;">
+         <div class="container">
+            <p class="text-muted">Copyright &copy 2017</p>
+         </div>
+      </footer>
+    
+     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+   </body>
+
+</html>

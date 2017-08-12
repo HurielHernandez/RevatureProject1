@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Revature</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="paper.css">
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-toggleable-md navbar-light bg-inverse ">
+		<div class="container">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<a class="navbar-brand" href="#"><strong>REVATURE </strong><span
+				style="color: #ccc;">REIMBURSEMENT</span></a>
+		</div>
+		<ul class="nav nav-pills">
+			<li class="nav-item dropdown "><a
+				class="nav-link dropdown-toggle active " data-toggle="dropdown"
+				href="#" role="button" aria-haspopup="true" aria-expanded="false">Huriel
+					Hernandez</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="#">Action</a> <a
+						class="dropdown-item" href="#">Another action</a> <a
+						class="dropdown-item" href="#">Something else here</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Separated link</a>
+				</div></li>
+		</ul>
+	</nav>
+	<main>
+	<div class="container">
+		<div class="row">
+			<div class="col-3">
+				<div class="list-group">
+					<button type="button"
+						class="list-group-item list-group-item-action">
+						Reimbursements</button>
+					<button type="button"
+						class="list-group-item list-group-item-action active">View
+						Employees</button>
+					<button type="button"
+						class="list-group-item list-group-item-action">Create
+						Employee</button>
+					<button type="button"
+						class="list-group-item list-group-item-action">Logout</button>
+				</div>
+			</div>
+			<div class="col-9 ">
+				<h3 class="">All Employees</h3>
+				<div class="card" style="padding: 40px 20px;"">
+					<table id="example" class="table table-hover "
+						style="margin-top: 60px;">
+						<thead>
+							<tr>
+								<th>FIRST NAME</th>
+								<th>LAST NAME</th>
+								<th>USERNAME</th>
+								<th>EMAIL</th>
+								<th>ACTIONS</th>
+							</tr>
+						</thead>
+						<tbody>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<footer class="footer navbar-faded" style="">
+		<div class="container">
+			<p class="text-muted">Copyright &copy 2017</p>
+		</div>
+	</footer>
+	<script src="http://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+		integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" charset="utf8"
+		src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+	<script type="text/javascript">
+         $(document).ready( function () {
+             $('#example').DataTable(
+            		 {
+            			   "processing": true,
+            		        "serverSide": true,
+            		        "ajax": {
+            		            "url": "/RevatureReimbursement/api/users",
+            		            "type": "POST",
+            		            "columnDefs": [
+            		                {
+            		                    "targets": [ 0, 1, 3, 4, 5],
+            		                    targets: [2],
+            		                    visible: false
+            		                }
+            		            ],
+            		            "columns": [
+            		                { "data": 'userName', name: 'userName' },
+            		                { "data": 'firstName', name: 'firstName' },
+            		                { "data": 'lastName', name: 'lastName' },
+            		                { "data": 'email', name: 'email' },
+            		                 {"data": "id",
+            		        "render": function ( data, type, full, meta ) {
+            		          return '<a href="/truck/'+data+'">View</a>';
+            		        }}],
+            		        "orderCellstop": true,
+            		        "deferRender": true
+            		          
+            		        }
+            		
+                   	} 
+             );
+         } );
+
+ 
+      </script>
+</body>
+</html>
