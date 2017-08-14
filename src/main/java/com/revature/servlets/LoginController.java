@@ -24,6 +24,8 @@ public class LoginController extends HttpServlet
 
 		String email = (String) request.getParameter("email");
 		String password = request.getParameter("password");
+		
+		System.out.println("LOGIN " + email);
 
 		HttpSession session = request.getSession(true);
 
