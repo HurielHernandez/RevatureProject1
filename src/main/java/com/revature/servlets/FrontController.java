@@ -26,24 +26,6 @@ public class FrontController extends HttpServlet
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-//		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
-//		
-//		reimbursements.add( new Reimbursement(1, "Bob", "Smith", "travel", "pending"));
-//		reimbursements.add( new Reimbursement(2, "Jane", "Doe", "travel", "aprroved"));
-//		reimbursements.add( new Reimbursement(3, "Jerry", "Dis", "travel", "denied"));
-		
-//		Gson gson = new Gson();
-//		
-//		String rJson = gson.toJson(" {User: Huriel Hernndez }" );
-//		
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.write(rJson);
-//		
-		
-//		request.getRequestDispatcher("/user.html").forward(request, response);
-		
 		doDispatch(request, response);
 	
 	}
@@ -56,20 +38,41 @@ public class FrontController extends HttpServlet
 	private void doDispatch(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		
-		System.out.println(request.getPathInfo());
+		String[] url = request.getPathInfo().split("/");
+		
+		for(String u : url)
+			System.out.println("I" + u);
+		
+		System.out.println(url[1]);
+		
 		{
-			switch(request.getPathInfo())
+			switch(url[1])
 			{
-			case"/login":
-				loginController.index(request, response);
-				break;
-			
-			case"/users":
-				userController.index(request, response);
-				break;
-			default:
-					response.sendRedirect("/RevatureReimbursement/static/index.html");
-			}
+				case"login":
+					loginController.index(request, response);
+					break;
+				
+				case"users":
+					if (url.length > 2)
+					{
+						System.out.println("users-" + url[1]);
+						switch (url[2])
+						{
+							case "create":
+								System.out.println("creaet User");
+								userController.create(request, response);
+								break;
+		
+							default:
+								userController.show(url[2], request, response);
+								break;
+						}
+					} else
+						userController.index(request, response);
+					break;
+				default:
+						response.sendRedirect("/RevatureReimbursement/static/index.html");
+				}
 		}
 		
 	}

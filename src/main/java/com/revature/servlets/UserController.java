@@ -30,9 +30,59 @@ public class UserController extends HttpServlet
 		
 		ArrayList<User> users  = userdatabase.readAllUsers();
 		
+		System.out.println(users);
+		
 		Gson gson = new Gson();
 		String rJson = gson.toJson(users);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
+		
+	}
+	
+	protected void show(String userName, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	{
+		System.out.println(userName + "USRERERES");
+		UserDAOImp userdatabase = new UserDAOImp();
+		
+		User user  = userdatabase.readUser(userName);
+		
+		System.out.println(user);
+		
+		Gson gson = new Gson();
+		String rJson = gson.toJson(user);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
+		
+	}
+	
+	protected void create( HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	{
+		System.out.println("USRERERES");
+		
+		User user = new User();
+		user.setUsername((String)request.getParameter("username"));
+		user.setFirstName((String)request.getParameter("firstName"));
+		user.setLastName((String)request.getParameter("lastName"));
+		user.setPassword("temporary password");
+		user.setEmail((String)request.getParameter("email"));
+		
+		int role = 0;
+		user.setUserRole(role);
+		
+		UserDAOImp userdatabase = new UserDAOImp();
+		
+		boolean created = userdatabase.createUser(user);
+		
+		System.out.println("user -"  + user + " " + created);
 
+		Gson gson = new Gson();
+		String rJson = gson.toJson(user);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

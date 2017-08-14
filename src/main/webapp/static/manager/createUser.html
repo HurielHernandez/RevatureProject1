@@ -7,7 +7,6 @@
       <!-- Optional theme -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
       <!-- Latest compiled and minified JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <link rel="stylesheet" type="text/css" href="../paper.css">
       <link rel="stylesheet" type="text/css" href="../main.css">
    </head>
@@ -50,29 +49,29 @@
                   <h3>Create New User</h3>
                     <div class="card">
                      <div class="card-block">
-                        <form>
+                        <form id="newUserForm">
                            <div class="form-group">
                               <label for="username-input" class="col-form-label">Username</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="username" id="username-input">
+                                 <input class="form-control" type="text" placeholder="username" id="username" required>
                               </div>
                            </div>
                            <div class="form-group">
                               <label for="firstname-input" class="col-form-label">First Name</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="John" id="firstname-input">
+                                 <input class="form-control" type="text" placeholder="John" id="firstName" required>
                               </div>
                            </div>
                            <div class="form-group">
                                <label for="lastname-input" class="col-form-label">Last Name</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="Doe" id="lastname-input">
+                                 <input class="form-control" type="text" placeholder="Doe" id="lastName" required>
                               </div>
                            </div>
                            <div class="form-group">
                               <label for="email-input" class="col-form-label">Email</label>
                               <div class="">
-                                 <input class="form-control" type="email" placeholder="email@email.com" id="email-input">
+                                 <input class="form-control" type="email" placeholder="email@email.com" id="email" required>
                               </div>
                            </div>
                            <div class="form-group">
@@ -83,9 +82,9 @@
                               </select>
                            </div>
 
-                           <button type="submit" class="btn btn-primary">CREATE</button>
-                     </div>
+                           <button type="submit" class="btn btn-primary" id="createButton">CREATE</button>
                      </form>
+                     </div>
                   </div>
          </div>
          <br>
@@ -98,8 +97,29 @@
             <p class="text-muted">Copyright &copy 2017</p>
          </div>
       </footer>
-      <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+      <script src="http://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+		crossorigin="anonymous"></script>
+	</script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+      <script>
+      		$('#newUserForm').submit(function(e){
+      		  e.preventDefault();
+      		  //do some verification
+      		  
+      		  $('#createButton').disable();
+      		  $.ajax({
+      		    url: '/RevatureReimbursement/api/users/create',
+      		    data: $
+      		    method: "POST",
+      		    success: function(data)
+      		    {
+      		      alert(data);
+      		    }
+      		  });
+      		});
+      
+      </script>
    </body>
 </html>
