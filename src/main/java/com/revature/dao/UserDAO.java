@@ -8,6 +8,8 @@ public interface UserDAO
 {
 	public User readUser(String userId);
 	
+	public User readUserE(String userEmail);
+	
 	public ArrayList<User> readAllUsers();
 	
 	public boolean createUser(User user);
