@@ -33,20 +33,12 @@ public class LoginController extends HttpServlet
 		
 		UserDAOImp temp = new UserDAOImp();
 		
-		ArrayList<User> check = new ArrayList<User>();
-		check = temp.readAllUsers();
-		Iterator<User> itr = check.iterator();
+		User check = temp.readUserE(email);
 		
-		
-		while(itr.hasNext()) {
-			User temporary = itr.next();
-			if(email.equals(temporary.getEmail())) {
-				if(password.equals(temporary.getPassword())) {
-					valid = true;
-				}
-			}
-				
+		if(password.equals(check.getPassword())) {
+			valid = true;
 		}
+		
 		
 		if(valid == false) {
 			Gson erGson = new Gson();

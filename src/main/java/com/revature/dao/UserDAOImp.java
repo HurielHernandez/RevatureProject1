@@ -192,6 +192,45 @@ public class UserDAOImp implements UserDAO
 		return deleted;
 	}
 
+	@Override
+	public User readUserE(String userEmail) {
+		{
+			PreparedStatement pstmt = null;
+			ResultSet resultSet = null;
+
+			User returnUser = new User();
+
+			try (Connection connection = ConnectionUtility.getConnectionFromProperties())
+			{
+				final String SQL = "SELECT * FROM ERS_USERS WHERE U_EMAIL = ?";
+				pstmt = connection.prepareStatement(SQL);
+				pstmt.setString(1, userEmail);
+				resultSet = pstmt.executeQuery();
+
+				while (resultSet.next())
+				{
+					returnUser.setId(resultSet.getInt("U_ID"));
+					returnUser.setUsername(resultSet.getString("U_USERNAME"));
+					returnUser.setEmail(resultSet.getString("U_EMAIL"));
+					returnUser.setFirstName(resultSet.getString("U_FIRSTNAME"));
+					returnUser.setLastName(resultSet.getString("U_LASTNAME"));
+					returnUser.setPassword(resultSet.getString("U_PASSWORD"));
+					
+					//add userrole
+
+				}
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+			} catch (IOException e1)
+			{
+				e1.printStackTrace();
+			}
+
+			return returnUser;
+		}
+	}
+
 
 
 }
