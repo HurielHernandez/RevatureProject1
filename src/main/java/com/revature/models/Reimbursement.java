@@ -1,6 +1,6 @@
 package com.revature.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Reimbursement
 {
@@ -163,8 +163,9 @@ public class Reimbursement
 	public String toString()
 	{
 		return "Reimbursement [id=" + id + ", amount=" + amount + ", description=" + description + ", submitted="
-				+ submitted + ", resolved=" + resolved + ", author=" + author + ", resolver=" + resolver + ", type="
-				+ type + ", status=" + status + "]";
+				+ submitted + ", resolved=" + resolved + ", author=" + author + ", authorId=" + authorId
+				+ ", resolverId=" + resolverId + ", resolver=" + resolver + ", type=" + type + ", status=" + status
+				+ "]";
 	}
 	
 	

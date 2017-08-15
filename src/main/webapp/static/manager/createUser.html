@@ -49,29 +49,29 @@
                   <h3>Create New User</h3>
                     <div class="card">
                      <div class="card-block">
-                        <form id="newUserForm">
+                        <form id="newUserForm"  method="POST">
                            <div class="form-group">
                               <label for="username-input" class="col-form-label">Username</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="username" id="username" required>
+                                 <input class="form-control" type="text" placeholder="username" name="username" required>
                               </div>
                            </div>
                            <div class="form-group">
                               <label for="firstname-input" class="col-form-label">First Name</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="John" id="firstName" required>
+                                 <input class="form-control" type="text" placeholder="John" name="firstName" >
                               </div>
                            </div>
                            <div class="form-group">
                                <label for="lastname-input" class="col-form-label">Last Name</label>
                               <div class="">
-                                 <input class="form-control" type="text" placeholder="Doe" id="lastName" required>
+                                 <input class="form-control" type="text" placeholder="Doe" name="lastName">
                               </div>
                            </div>
                            <div class="form-group">
                               <label for="email-input" class="col-form-label">Email</label>
                               <div class="">
-                                 <input class="form-control" type="email" placeholder="email@email.com" id="email" required>
+                                 <input class="form-control" type="email" placeholder="email@email.com" name="email">
                               </div>
                            </div>
                            <div class="form-group">
@@ -81,10 +81,12 @@
                                  <option>Manager</option>
                               </select>
                            </div>
-
                            <button type="submit" class="btn btn-primary" id="createButton">CREATE</button>
                      </form>
                      </div>
+                     
+
+	    
                   </div>
          </div>
          <br>
@@ -104,18 +106,24 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
       <script>
-      		$('#newUserForm').submit(function(e){
+      	
+      		$("#newUserForm").submit(function(e){
       		  e.preventDefault();
       		  //do some verification
+      		 
       		  
-      		  $('#createButton').disable();
+      		  $('#createButton').attr('disabled', 'disabled');
+      		  
       		  $.ajax({
-      		    url: '/RevatureReimbursement/api/users/create',
-      		    data: $
+      		    url: "/RevatureReimbursement/api/users/create/",
       		    method: "POST",
+      		    data: $("#newUserForm").serializeArray(),
+      		    dataType:text,
       		    success: function(data)
       		    {
       		      alert(data);
+      		    
+          		  $('#createButton').attr('disabled', false);
       		    }
       		  });
       		});

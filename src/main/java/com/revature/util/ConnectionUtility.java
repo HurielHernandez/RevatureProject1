@@ -1,5 +1,6 @@
 package com.revature.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,18 +16,18 @@ public class ConnectionUtility
 	{
 //		Properties properties = new Properties();
 //		
-//		InputStream inputStream = new FileInputStream("connection.properties");
+//		InputStream inputStream = PropInfo.class.getClassLoader().getResourceAsStream(new FileInputStream("connection.properties"));
 //		
 //		properties.load(inputStream);
 		
-		OracleDriver driver = new OracleDriver();
-		DriverManager.registerDriver(driver);
-		
-		
-		String url ="jdbc:oracle:thin:@protoreimbursment.ct8iyplsxvql.us-east-2.rds.amazonaws.com:1521:orcl";
+		String url = "jdbc:oracle:thin:@protoreimbursment.ct8iyplsxvql.us-east-2.rds.amazonaws.com:1521:orcl";
 		String username = "ERS_User";
 		String password = "ERS_Password";
 		
+		OracleDriver driver = new OracleDriver();
+		DriverManager.registerDriver(driver);
+
+
 		return DriverManager.getConnection(url, username, password);
 		
 		

@@ -42,12 +42,12 @@ public class UserController extends HttpServlet
 		
 	}
 	
-	protected void show(String userName, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	protected void show(String username, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-		System.out.println(userName + "USRERERES");
+		System.out.println(username + "USRERERES");
 		UserDAOImp userdatabase = new UserDAOImp();
 		
-		User user  = userdatabase.readUser(userName);
+		User user  = userdatabase.readUser(username);
 		
 		System.out.println(user);
 		
@@ -63,9 +63,8 @@ public class UserController extends HttpServlet
 	
 	protected void create( HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-		System.out.println("USRERERES");
-		
 		User user = new User();
+		
 		user.setUsername((String)request.getParameter("username"));
 		user.setFirstName((String)request.getParameter("firstName"));
 		user.setLastName((String)request.getParameter("lastName"));
@@ -79,7 +78,34 @@ public class UserController extends HttpServlet
 		
 		boolean created = userdatabase.createUser(user);
 		
-		System.out.println("user -"  + user + " " + created);
+		System.out.println("user -"  + user + " " + false);
+
+		Gson gson = new Gson();
+		String rJson = gson.toJson(user);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
+		
+	}
+	
+	protected void update(String username, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	{
+		UserDAOImp userdatabase = new UserDAOImp();
+		
+		User user = userdatabase.readUser(username);
+		System.out.println(user);
+		
+		user.setUsername((String)request.getParameter("username"));
+		user.setFirstName((String)request.getParameter("firstName"));
+		user.setLastName((String)request.getParameter("lastName"));
+		user.setPassword("temporary password");
+		user.setEmail((String)request.getParameter("email"));		
+		
+		boolean updated = userdatabase.updateUser(user);
+		
+		System.out.println("user -"  + user + " " + updated);
 
 		Gson gson = new Gson();
 		String rJson = gson.toJson(user);

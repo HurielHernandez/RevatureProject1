@@ -22,6 +22,7 @@ public class FrontController extends HttpServlet
 	
 	UserController userController = new UserController();
 	LoginController loginController = new LoginController();
+	ReimbursementController reimbursementController = new ReimbursementController();
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
@@ -39,42 +40,79 @@ public class FrontController extends HttpServlet
 	{
 		
 		String[] url = request.getPathInfo().split("/");
-		
-		for(String u : url)
-			System.out.println("I" + u);
-		
-		System.out.println(url[1]);
-		
+
+//		System.out.println(url[1]);
+		if(url.length > 1)
 		{
-			switch(url[1])
+			//www.url/RevautreReimbursement/static/api/{url[1]}/
+			switch (url[1])
 			{
-				case"login":
+				case "login":
 					loginController.index(request, response);
 					break;
-				
-				case"users":
-					if (url.length > 2)
-					{
-						System.out.println("users-" + url[1]);
-						switch (url[2])
-						{
-							case "create":
-								System.out.println("creaet User");
-								userController.create(request, response);
-								break;
-		
-							default:
-								userController.show(url[2], request, response);
-								break;
-						}
-					} else
-						userController.index(request, response);
+				case "users":
+					sendToUserController(request, response, url);
+					break;
+				case "reimbursements":
+					sendToReimbursementController(request, response, url);
 					break;
 				default:
-						response.sendRedirect("/RevatureReimbursement/static/index.html");
-				}
+					response.sendRedirect("/RevatureReimbursement/static/index.html");
+			}
 		}
 		
+	}
+
+	private void sendToUserController(HttpServletRequest request, HttpServletResponse response, String[] url)
+			throws IOException, ServletException
+	{
+		if (url.length > 2)
+		{
+			switch (url[2])
+			{
+				// www.url/RevautreReimbursement/static/api/users/{create}
+				case "create":
+					System.out.println("CREATE");
+					userController.create(request, response);
+					break;
+				default:
+					// www.url/RevautreReimbursement/static/api/users/{username}/create
+					if (url.length > 3 && url[3].equals("update"))
+						userController.update(url[2], request, response);
+					else
+						// www.url/RevautreReimbursement/static/api/users/{username}/
+						userController.show(url[2], request, response);
+				break;
+			}
+		} else
+			// www.url/RevautreReimbursement/static/api/users/
+			userController.index(request, response);
+	}
+	
+	private void sendToReimbursementController(HttpServletRequest request, HttpServletResponse response, String[] url)
+			throws IOException, ServletException
+	{
+		if (url.length > 2)
+		{
+			switch (url[2])
+			{
+//				// www.url/RevautreReimbursement/static/api/reimbursement/{create}
+				case "create":
+					System.out.println("CREATE");
+					reimbursementController.create(request, response);
+					break;
+				default:
+//					// www.url/RevautreReimbursement/static/api/reimbursement/{username}/update
+//					if (url.length > 3 && url[3].equals("update"))
+//						userController.update(url[2], request, response);
+//					else
+//						// www.url/RevautreReimbursement/static/api/reimbursements/{reimbursementId}/
+						reimbursementController.show(Integer.parseInt(url[2]), request, response);
+//				break;
+			}
+		} else
+			// www.url/RevautreReimbursement/static/api/users/
+			reimbursementController.index(request, response);
 	}
 	
 }

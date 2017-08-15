@@ -33,11 +33,12 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 				Reimbursement reimbursement= new Reimbursement();
 				reimbursement.setId(resultSet.getInt("R_ID"));
 				reimbursement.setAmount(resultSet.getDouble("R_AMOUNT"));
-				reimbursement.setDescription(resultSet.getString("R_DESPCRIPTION"));
+				reimbursement.setDescription(resultSet.getString("R_DESCRIPTION"));
 				reimbursement.setSubmitted(resultSet.getDate("R_SUBMITTED"));
-				reimbursement.setResolver(resultSet.getString("R_RESOLVER"));
-				reimbursement.setAuthorId(resultSet.getInt("UID_AUTHOR"));
-				reimbursement.setResolverId(resultSet.getInt("UID_RESOLVER"));
+				reimbursement.setAuthorId(resultSet.getInt("U_ID_AUTHOR"));
+				reimbursement.setResolverId(resultSet.getInt("U_ID_RESOLVER"));
+				reimbursement.setType(resultSet.getInt("RT_TYPE"));
+				reimbursement.setType(resultSet.getInt("RT_STATUS"));
 				//add receipt
 				//add type
 				//add status
@@ -148,23 +149,21 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 		
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
-			final String SQL = "INSERT INTO ERS_REIMBURSEMENTS (R_AMOUNT, R_DESCRIPTION, R_SUBMITTED, R_RESOLVED,"
-					+ " U_ID_AUTHOR, U_ID_RESOLVER=?, RT_TYPE, RT_STATUS) VALUES(?,?,?,?,?,?,?,?) ";
+			final String SQL = "INSERT INTO ERS_REIMBURSMENTS (R_AMOUNT, R_DESCRIPTION, R_SUBMITTED,"
+					+ " U_ID_AUTHOR, RT_TYPE, RT_STATUS) VALUES(?,?,?,?,?,?) ";
 
 			pstmt = connection.prepareStatement(SQL);
 			pstmt.setDouble(1, reimburse.getAmount());
 			pstmt.setString(2, reimburse.getDescription());
 			//pstmt.setBlob(3, reimburse.getReciept);
-			pstmt.setDate(3, (Date) reimburse.getSubmitted());
-			pstmt.setDate(4, (Date) reimburse.getResolved());
-			pstmt.setInt(5, reimburse.getAuthorId());
-			pstmt.setInt(6, reimburse.getResolverId());
-			pstmt.setInt(7, reimburse.getType());
-			pstmt.setInt(8, reimburse.getStatus());
+			pstmt.setDate(3, reimburse.getSubmitted());
+			pstmt.setInt(4, reimburse.getAuthorId());
+			pstmt.setInt(5, 1);
+			pstmt.setInt(6, 1);
 			
-			int result = pstmt.executeUpdate();
+			ResultSet result = pstmt.executeQuery();
 			//get user role
-			if (result  > 0)
+			if (result.next())
 			{
 				created  = true;
 			}
@@ -178,6 +177,48 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 		}
 		
 		return created ;
+	}
+
+	@Override
+	public Reimbursement readReimbursement(int reimbursementId)
+	{
+		PreparedStatement pstmt = null;
+		ResultSet resultSet = null;
+
+		Reimbursement reimbursement= new Reimbursement();
+
+		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
+		{
+			final String SQL = "SELECT * FROM ERS_REIMBURSMENTS WHERE R_ID =?";
+			pstmt = connection.prepareStatement(SQL);
+			pstmt.setInt(1, reimbursementId);
+			resultSet = pstmt.executeQuery();
+
+			while (resultSet.next()  )
+			{
+				
+				reimbursement.setId(resultSet.getInt("R_ID"));
+				reimbursement.setAmount(resultSet.getDouble("R_AMOUNT"));
+				reimbursement.setDescription(resultSet.getString("R_DESPCRIPTION"));
+				reimbursement.setSubmitted(resultSet.getDate("R_SUBMITTED"));
+				reimbursement.setResolver(resultSet.getString("R_RESOLVER"));
+				reimbursement.setAuthorId(resultSet.getInt("UID_AUTHOR"));
+				reimbursement.setResolverId(resultSet.getInt("UID_RESOLVER"));
+				//add receipt
+				//add type
+				//add status
+
+
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		} catch (IOException e1)
+		{
+			e1.printStackTrace();
+		}
+
+		return reimbursement;
 	}
 
 }
