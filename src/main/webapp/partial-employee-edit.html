@@ -1,0 +1,33 @@
+<h3>Edit User Information</h3>
+<div class="card">
+   <div class="card-block">
+      <form id="updateUserForm" method="POST">
+         <div class="form-group">
+            <label for="username-input" class="col-form-label">Username</label>
+            <div class="">
+               <input class="form-control" type="text" value="{{user.username}}" name="username">
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="firstname-input" class="col-form-label">First Name</label>
+            <div class="">
+               <input class="form-control" type="text" value="{{user.firstName}}" name="firstName">
+            </div>
+         </div>
+         <div class="form-group">
+             <label for="lastname-input" class="col-form-label">Last Name</label>
+            <div class="">
+               <input class="form-control" type="text" value="{{user.lastName}}" name="lastName">
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="email-input" class="col-form-label">Email</label>
+            <div class="">
+               <input class="form-control" type="email" value="{{user.email}}"  name="email">
+            </div>
+         </div>
+
+         <button type="submit" class="btn btn-primary" id="updateButton">UPDATE</button>
+      </form>
+   </div>
+</div>

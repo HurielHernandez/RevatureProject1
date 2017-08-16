@@ -1,0 +1,45 @@
+<h3>Expense Reimbursements</h3>
+<div class="card" style="padding: 40px 20px;">
+   <table id="example" class="table table-hover ">
+      <thead>
+         <tr>
+            <th>REIMBURSEMENT ID</th>
+            <th>EMPLOYEE</th>
+            <th>APPROVER</th>
+            <th>STATUS</th>
+            <th>TOTAL</th>
+            <th>ACTIONS</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>R-000003809</td>
+            <td>John Doe</td>
+            <td>Joe Manager</td>
+            <td>Approved</td>
+            <td>$9.99</td>
+            <td><a href="./managerExpense.html" class="btn">VIEW</a></td>
+         </tr>
+         <tr>
+            <td>R-000003809</td>
+            <td>Jane Doe</td>
+            <td></td>
+            <td>Pending</td>
+            <td>$9.99</td>
+            <td><a href="./managerExpense.html" class="btn">VIEW</a></td>
+         </tr>
+         <tr ng-repeat="reimbursment in reimbursements">
+            <td>{{ reimbursment.id }}</td>
+            <td>{{ reimbursment.authorId }}</td>
+            <td>{{ reimbursment.resolverID }}</td>
+            <td>{{ reimbursment.status }}</td>
+            <td>{{ reimbursment.amount }}</td>
+            <td><a class="btn" ui-sref="manager.view({employeeId: 1 })">VIEW</a></td>
+            </tr>
+      </tbody>
+   </table>
+</div>
+
+<script type="text/javascript">
+   $('#example').dataTable({});
+</script>

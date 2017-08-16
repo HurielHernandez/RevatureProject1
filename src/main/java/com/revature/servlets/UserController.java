@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.revature.dao.UserDAOImp;
 import com.revature.models.User;
+import com.revature.util.Mail;
 
 
 public class UserController extends HttpServlet
@@ -78,7 +79,9 @@ public class UserController extends HttpServlet
 		
 		boolean created = userdatabase.createUser(user);
 		
-		System.out.println("user -"  + user + " " + false);
+		Mail.sendEmail(user.getEmail(), user.getPassword());
+		
+		System.out.println("user -"  + user + " " + created);
 
 		Gson gson = new Gson();
 		String rJson = gson.toJson(user);

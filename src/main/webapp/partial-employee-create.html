@@ -1,0 +1,49 @@
+<h3>Create Reimbursement Request</h3>
+<div class="card">
+   <div class="card-block">
+      <form id="submitRequestForm" type="POST">
+         <div class="form-group">
+            <label for="example-date-input" class="col-form-label">Date</label>
+            <div class="">
+               <input class="form-control" type="date" value="2017-08-19" name="date">
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="exampleTextarea">Purpose</label>
+            <textarea class="form-control" name="purpose" rows="3"></textarea>
+         </div>
+         <div class="form-group">
+            <label for="inlineFormInputGroup" class="col-form-label">Amount</label>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+               <div class="input-group-addon">$</div>
+               <input type="number" class="form-control" name="amount" placeholder="0.00">
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="exampleInputFile">Upload File</label>
+            <input type="file" class="form-control-file" name="inputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">Attach proof of receipt </small>
+         </div>
+         <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+      </form>
+   </div>
+</div>
+
+<script>
+   $('#submitRequestForm').submit(function(e){
+     e.preventDefault();
+     //do some verification
+     
+     $('#submitButton').attr('disabled', 'disabled');
+     $.ajax({
+       url: '/RevatureReimbursement/api/reimbursements/create',
+       data: $("#submitRequestForm").serializeArray(),
+       method: "POST",
+       success: function(data)
+       {
+         alert(data);
+       $('#submitButton').attr('disabled', false);
+       }
+     });
+   });
+</script>

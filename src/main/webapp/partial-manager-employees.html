@@ -1,0 +1,28 @@
+<h3 class="">All Employees</h3>
+<div class="card" style="padding: 40px 20px;"">
+	<table id="employees" class="table table-hover "
+		style="margin-top: 60px;">
+		<thead>
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>USERNAME</th>
+				<th>EMAIL</th>
+				<th>ACTIONS</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td><a class="btn" ui-sref="manager.view({employeeId: 1 })">VIEW</a></td>
+            </tr>
+    
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+   $('#employees').dataTable({});
+</script>

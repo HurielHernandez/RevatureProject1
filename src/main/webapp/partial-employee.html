@@ -1,0 +1,35 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded ">
+         <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="./home.html"><strong>REVATURE </strong><span class="text-muted">REIMBURSEMENT</span></a>
+         </div>
+         <ul class="nav nav-pills" >
+            <li class="nav-item dropdown ">
+               <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user.firstName}} {{user.lastName}}</a>
+            </li>
+         </ul>
+      </nav>
+      <main >
+         <div class="container">
+            <div class="row">
+               <div class="col-3">
+                  <div class="list-group">
+                     <button type="button" class="list-group-item list-group-item-action" ui-sref=".home" ui-sref-active="active">Reimbursements</button>
+                     <button type="button" class="list-group-item list-group-item-action" ui-sref=".create" ui-sref-active="active">Create Request</button>
+                     <button type="button" class="list-group-item list-group-item-action" ui-sref=".user" ui-sref-active="active">Personal Information</button>
+                     <button type="button" class="list-group-item list-group-item-action" ui-sref-active="active">Logout</button>
+                  </div>
+               </div>
+               <div class="col-9" ui-view>
+
+               </div>
+            </div>
+         </div>
+      </main>
+      <footer class="footer navbar-faded" style="">
+         <div class="container">
+            <p class="text-muted">Copyright &copy 2017</p>
+         </div>
+      </footer>

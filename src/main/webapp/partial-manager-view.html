@@ -1,0 +1,62 @@
+<h3>Employee Information</h3>
+<div class="card">
+   <div class="card-block">
+      <h4 class="card-title">Details </h4>
+
+      <div class="row container">
+         <div class="col">
+            <div class="list-group">
+               <li href="#" class="list-group-item  flex-column aign-items-start border-0">
+                  <div class="d-flex w-100 justify-content-between">
+                     <strong class="mb-1">{{user.firstName}} {{user.lastName}}<br><small class="mb-1">NAME</small></strong> 
+                  </div>
+               </li>
+               <li href="#" class="list-group-item  flex-column aign-items-start border-0">
+                  <div class="d-flex w-100 justify-content-between">
+                     <strong class="mb-1">{{user.email}}<br><small class="mb-1">EMAIL</small></strong>
+                  </div>
+               </li>
+               <li href="#" class="list-group-item  flex-column aign-items-start border-0">
+                  <div class="d-flex w-100 justify-content-between">
+                     <strong class="mb-1">{{user.username}}<br><small class="mb-1">USERNAME</small></strong> 
+                  </div>
+               </li>
+            </div>
+         </div>
+      </div>    
+   </div>
+   <br>  
+</div>
+
+<br>
+<h3>Reimbursement Requests</h3>
+<div class="card" style="padding: 20px 0">
+      <table class="table table-hover ">
+         <thead>
+            <tr>
+               <th>REIMBURSEMENT ID</th>
+               <th>APPROVER</th>
+               <th>STATUS</th>
+               <th>TOTAL</th>
+               <th>ACTIONS</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>R-000003809</td>
+               <td></td>
+               <td>Approved</td>
+               <td>$9.99</td>
+               <td><a href="./managerExpense.html" class="btn btn-outline-primary">VIEW</a></td>
+            </tr>
+            <tr>
+               <td>R-000003809</td>
+               <td></td>
+               <td>Pending</td>
+               <td>$9.99</td>
+               <td><a href="./managerExpense.html" class="btn btn-outline-primary">VIEW</a></td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>

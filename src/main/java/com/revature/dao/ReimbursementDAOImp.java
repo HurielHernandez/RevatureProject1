@@ -38,7 +38,8 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 				reimbursement.setAuthorId(resultSet.getInt("U_ID_AUTHOR"));
 				reimbursement.setResolverId(resultSet.getInt("U_ID_RESOLVER"));
 				reimbursement.setType(resultSet.getInt("RT_TYPE"));
-				reimbursement.setType(resultSet.getInt("RT_STATUS"));
+
+				
 				//add receipt
 				//add type
 				//add status
@@ -67,7 +68,7 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 
 		try (Connection connection = ConnectionUtility.getConnectionFromProperties())
 		{
-			final String SQL = "SELECT * FROM ERS_REIMBURSMENTS WHERE U_ID_AUTHOR =?";
+			final String SQL = "SELECT * FROM ERS_REIMBURSEMENTS WHERE U_ID_AUTHOR =?";
 			pstmt = connection.prepareStatement(SQL);
 			pstmt.setInt(1, userId);
 			resultSet = pstmt.executeQuery();
@@ -77,11 +78,11 @@ public class ReimbursementDAOImp implements ReimbursementDAO
 				Reimbursement reimbursement= new Reimbursement();
 				reimbursement.setId(resultSet.getInt("R_ID"));
 				reimbursement.setAmount(resultSet.getDouble("R_AMOUNT"));
-				reimbursement.setDescription(resultSet.getString("R_DESPCRIPTION"));
+				reimbursement.setDescription(resultSet.getString("R_DESCRIPTION"));
 				reimbursement.setSubmitted(resultSet.getDate("R_SUBMITTED"));
 				reimbursement.setResolver(resultSet.getString("R_RESOLVER"));
-				reimbursement.setAuthorId(resultSet.getInt("UID_AUTHOR"));
-				reimbursement.setResolverId(resultSet.getInt("UID_RESOLVER"));
+				reimbursement.setAuthorId(resultSet.getInt("U_ID_AUTHOR"));
+				reimbursement.setResolverId(resultSet.getInt("U_ID_RESOLVER"));
 				//add receipt
 				//add type
 				//add status

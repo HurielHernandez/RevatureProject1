@@ -23,7 +23,7 @@ public class FrontController extends HttpServlet
 	UserController userController = new UserController();
 	LoginController loginController = new LoginController();
 	ReimbursementController reimbursementController = new ReimbursementController();
-	
+
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
@@ -96,19 +96,21 @@ public class FrontController extends HttpServlet
 		{
 			switch (url[2])
 			{
-//				// www.url/RevautreReimbursement/static/api/reimbursement/{create}
+//				// www.url/RevautreReimbursement/static/api/reimbursements/{create}
 				case "create":
 					System.out.println("CREATE");
 					reimbursementController.create(request, response);
 					break;
 				default:
-//					// www.url/RevautreReimbursement/static/api/reimbursement/{username}/update
-//					if (url.length > 3 && url[3].equals("update"))
-//						userController.update(url[2], request, response);
-//					else
+//					// www.url/RevautreReimbursement/static/api/reimbursements/{id}/update
+					if (url.length > 3 && url[3].equals("update"))
+						reimbursementController.update(Integer.parseInt(url[2]), request, response);
+					else if (url.length > 3 && url[3].equals("user"))
+						reimbursementController.userIndex(Integer.parseInt(url[2]), request, response);
+					else
 //						// www.url/RevautreReimbursement/static/api/reimbursements/{reimbursementId}/
 						reimbursementController.show(Integer.parseInt(url[2]), request, response);
-//				break;
+				break;
 			}
 		} else
 			// www.url/RevautreReimbursement/static/api/users/

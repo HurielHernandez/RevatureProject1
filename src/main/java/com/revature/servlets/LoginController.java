@@ -27,15 +27,17 @@ public class LoginController extends HttpServlet
 	{
 
 		String email = (String) request.getParameter("email");
-		String password = request.getParameter("password");
+		String password = (String)request.getParameter("password");
 		boolean valid = false;
 		
 		
-		UserDAOImp temp = new UserDAOImp();
+		UserDAOImp userDatabase = new UserDAOImp();
 		
-		User check = temp.readUserE(email);
+		User user = userDatabase.readUserE(email);
 		
-		if(password.equals(check.getPassword())) {
+		System.out.println(user);
+		
+		if(password.equals(user.getPassword())) {
 			valid = true;
 		}
 		
@@ -51,6 +53,7 @@ public class LoginController extends HttpServlet
 			return;
 		}
 		
+		
 		System.out.println("LOGIN " + email);
 
 		HttpSession session = request.getSession(true);
@@ -59,6 +62,7 @@ public class LoginController extends HttpServlet
 		{
 			session.setAttribute("email", email);
 			session.setAttribute("password", password);
+			session.setAttribute("userId", user.getId());
 			Gson conGson = new Gson();
 			String conJson = conGson.toJson("Successful login");
 			response.setContentType("application/json");

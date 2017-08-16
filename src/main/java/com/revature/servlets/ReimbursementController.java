@@ -45,6 +45,26 @@ public class ReimbursementController extends HttpServlet
 		
 	}
 	
+	protected void userIndex(int userId, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	{
+	
+		ReimbursementDAOImp reimbursementDatabase = new ReimbursementDAOImp();
+		
+		ArrayList<Reimbursement> reimbursements  = reimbursementDatabase.readAllReimbursement(userId);
+		
+		System.out.println(reimbursements);
+		
+		Gson gson = new Gson();
+		String rJson = gson.toJson(reimbursements);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
+		
+	}
+	
+	
 	protected void show(int reimbursementId, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		System.out.println(reimbursementId + "REIMBURSEMENTid");
@@ -70,67 +90,55 @@ public class ReimbursementController extends HttpServlet
 		//get User that is logged in
 		HttpSession session = request.getSession(true);
 		
-		User user = (User) session.getAttribute("User");
-		
+		System.out.println(session.getAttribute("userId") + " EMAIL");
+			
 		Reimbursement reimbursement = new Reimbursement();
-		reimbursement.setAmount(9.99);
+		reimbursement.setAmount(Double.parseDouble(request.getParameter("amount").toString()));
 		reimbursement.setDescription(request.getParameter("purpose"));
 		reimbursement.setSubmitted(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-		reimbursement.setAuthorId(41);
+		reimbursement.setAuthorId(Integer.parseInt(session.getAttribute("userId").toString()));
 		
 		ReimbursementDAOImp reimbursementDatabase = new ReimbursementDAOImp();
 		boolean created = reimbursementDatabase.createReimbursment(reimbursement);
 		
+		System.out.println("reimbursement -"  + reimbursement + " " + created);
+		Gson gson = new Gson();
+		String rJson = gson.toJson(reimbursement);
 		
-//		user.setUsername((String)request.getParameter("username"));
-//		user.setFirstName((String)request.getParameter("firstName"));
-//		user.setLastName((String)request.getParameter("lastName"));
-//		user.setPassword("temporary password");
-//		user.setEmail((String)request.getParameter("email"));
-//		
-//		int role = 0;
-//		user.setUserRole(role);
-//		
-//		UserDAOImp userdatabase = new UserDAOImp();
-//		
-//		boolean created = userdatabase.createUser(user);
-//		
-//		System.out.println("user -"  + user + " " + false);
-//
-//		Gson gson = new Gson();
-//		String rJson = gson.toJson(user);
-//		
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.write(rJson);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
 		
 	}
 	
-	protected void update(String username, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+	protected void update(int reimbursementId, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-//		UserDAOImp userdatabase = new UserDAOImp();
-//		
-//		User user = userdatabase.readUser(username);
-//		System.out.println(user);
-//		
-//		user.setUsername((String)request.getParameter("username"));
-//		user.setFirstName((String)request.getParameter("firstName"));
-//		user.setLastName((String)request.getParameter("lastName"));
-//		user.setPassword("temporary password");
-//		user.setEmail((String)request.getParameter("email"));		
-//		
-//		boolean updated = userdatabase.updateUser(user);
-//		
-//		System.out.println("user -"  + user + " " + updated);
-//
-//		Gson gson = new Gson();
-//		String rJson = gson.toJson(user);
-//		
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.write(rJson);
+		//get User that is logged in
+		HttpSession session = request.getSession(true);
+				
+		System.out.println(session.getAttribute("userId") + " USERID");
+		
+		ReimbursementDAOImp reimbursementDatabase = new ReimbursementDAOImp();
+		
+		Reimbursement reimbursement =  reimbursementDatabase.readReimbursement(reimbursementId);
+		
+		reimbursement.setResolved( new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+		reimbursement.setResolverId( Integer.parseInt(session.getAttribute("userId").toString()) );
+		reimbursement.setStatus(2);
+		
+		
+		boolean updated = reimbursementDatabase.updateReimbursment(reimbursement);
+		
+		System.out.println("reimbursement -"  + reimbursement + " " + updated);
+
+		Gson gson = new Gson();
+		String rJson = gson.toJson(reimbursement);
+		
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.write(rJson);
 		
 	}
 

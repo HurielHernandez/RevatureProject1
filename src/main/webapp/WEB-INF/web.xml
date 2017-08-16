@@ -5,15 +5,6 @@
 	version="2.5">
 	<display-name>RevatureReimbursement</display-name>
 
-	<filter>
-		<filter-name>LoggedInFilter</filter-name>
-		<filter-class>com.revature.filter.MainFilter</filter-class>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>LoggedInFilter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
 
 	<servlet>
 		<servlet-name>FrontController</servlet-name>
